@@ -1,72 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
-  <DataSources>
-    <DataSource Name="VTNZSharedDataSource">
-      <DataSourceReference>VTNZSharedDataSource</DataSourceReference>
-      <rd:DataSourceID>fe3532b1-1717-469d-83b9-47e7fe6c4a07</rd:DataSourceID>
-      <rd:SecurityType>None</rd:SecurityType>
-    </DataSource>
-  </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet1">
-      <Fields>
-        <Field Name="Station">
-          <DataField>Station</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Dept">
-          <DataField>Dept</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ProductDesc">
-          <DataField>ProductDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="GSBCard">
-          <DataField>GSBCard</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="SaleDate">
-          <DataField>SaleDate</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="Qty">
-          <DataField>Qty</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Amount">
-          <DataField>Amount</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>VTNZSharedDataSource</DataSourceName>
-        <CommandText>SELECT Locations.name AS Station, r_departments.description As Dept, 
-(Products.plucode + ' - ' + Products.description) AS ProductDesc, 
-Sales.uGSBCard As GSBCard, Sales.CompletedDT As SaleDate, Salelines.qty As Qty, Salelines.totalprice As Amount 
-FROM Salelines INNER JOIN
-     Sales ON Salelines.Sid = Sales.Sid INNER JOIN
-     Products ON Salelines.Pid = Products.pid INNER JOIN
-     r_departments ON Products.r_depid = r_departments.depid INNER JOIN
-     Customers ON Sales.Cid = Customers.Cid INNER JOIN
-     Locations ON Sales.location = Locations.location_id
-WHERE (Sales.CompletedDT BETWEEN @StartDate AND @EndDate + 1)
-AND (Customers.cid = 306429)
-AND (Sales.Phase = 1) 
-AND (products.pid in (select pid from pricemaps where cid = 306429))
-ORDER BY r_departments.description, Products.plucode</CommandText>
-        <QueryParameters>
-          <QueryParameter Name="@StartDate">
-            <Value>=Parameters!StartDate.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@EndDate">
-            <Value>=Parameters!EndDate.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-  </DataSets>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
       <Tablix Name="table1">
@@ -1448,7 +1381,6 @@ ORDER BY r_departments.description, Products.plucode</CommandText>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
         <Top>1.485in</Top>
-        <Left>0cm</Left>
         <Height>1.06in</Height>
         <Width>11.27083in</Width>
         <Style />
@@ -1472,7 +1404,6 @@ ORDER BY r_departments.description, Products.plucode</CommandText>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>textbox1</rd:DefaultName>
-        <Left>0cm</Left>
         <Height>0.36in</Height>
         <Width>7in</Width>
         <ZIndex>1</ZIndex>
@@ -1497,38 +1428,14 @@ ORDER BY r_departments.description, Products.plucode</CommandText>
                   <Color>SteelBlue</Color>
                 </Style>
               </TextRun>
-              <TextRun>
-                <Value>WF1, WF3, WF4, APA, APE, APN, APV, PPF, PPM, BT2, BT3, BT4, BTL2, BTL3, BTL4, MCA, V2, V2H, V2P, V3, V3P,
-                 V4, V4P, VL, VLP, VPH, VPM, VT1, VT1P, VT2, VT2P, VT3, VT3P, VT4, VT4P, RA12, RACT, RAMH, RAP12, RAPMH</Value>
-                <Style>
-                  <FontFamily>Tahoma</FontFamily>
-                  <FontWeight>Normal</FontWeight>
-                  <Color>SteelBlue</Color>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>                 (derived from STP set up for this account)</Value>
-                <Style>
-                  <FontStyle>Italic</FontStyle>
-                  <FontFamily>Tahoma</FontFamily>
-                  <FontWeight>Normal</FontWeight>
-                  <Color>SteelBlue</Color>
-                </Style>
-              </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>textbox1</rd:DefaultName>
-        <Top>2.25777cm</Top>
-        <Left>0cm</Left>
-        <Height>0.52667in</Height>
-        <Width>8.60416in</Width>
+        <Top>2.29306cm</Top>
+        <Height>0.25in</Height>
+        <Width>0.96875in</Width>
         <ZIndex>2</ZIndex>
         <Style>
           <PaddingLeft>2pt</PaddingLeft>
@@ -1565,7 +1472,6 @@ ORDER BY r_departments.description, Products.plucode</CommandText>
         </Paragraphs>
         <rd:DefaultName>textbox1</rd:DefaultName>
         <Top>1.09643cm</Top>
-        <Left>0cm</Left>
         <Height>0.235in</Height>
         <Width>3.34375in</Width>
         <ZIndex>3</ZIndex>
@@ -1596,7 +1502,6 @@ ORDER BY r_departments.description, Products.plucode</CommandText>
         </Paragraphs>
         <rd:DefaultName>Textbox56</rd:DefaultName>
         <Top>0.66667in</Top>
-        <Left>0cm</Left>
         <Height>0.20833in</Height>
         <Width>0.96875in</Width>
         <ZIndex>4</ZIndex>
@@ -1720,10 +1625,169 @@ ORDER BY r_departments.description, Products.plucode</CommandText>
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Textbox Name="Result">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!Result.Value, "PLUCodeList")</Value>
+                <Style>
+                  <FontFamily>Tahoma</FontFamily>
+                  <Color>SteelBlue</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Result</rd:DefaultName>
+        <Top>0.90278in</Top>
+        <Left>0.96875in</Left>
+        <Height>0.25in</Height>
+        <Width>8.48958in</Width>
+        <ZIndex>8</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="textbox32">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>                 (derived from STP set up for this account)</Value>
+                <Style>
+                  <FontStyle>Italic</FontStyle>
+                  <FontFamily>Tahoma</FontFamily>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>SteelBlue</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>textbox1</rd:DefaultName>
+        <Top>2.99861cm</Top>
+        <Left>0.66146cm</Left>
+        <Height>0.235in</Height>
+        <Width>8.60416in</Width>
+        <ZIndex>9</ZIndex>
+        <Style>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
-    <Height>2.62486in</Height>
+    <Height>2.62833in</Height>
     <Style />
   </Body>
+  <Width>11.27083in</Width>
+  <Page>
+    <LeftMargin>1in</LeftMargin>
+    <RightMargin>1in</RightMargin>
+    <TopMargin>1in</TopMargin>
+    <BottomMargin>1in</BottomMargin>
+    <Style />
+  </Page>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="VTNZSharedDataSource">
+      <DataSourceReference>VTNZSharedDataSource</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>fe3532b1-1717-469d-83b9-47e7fe6c4a07</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>VTNZSharedDataSource</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@StartDate">
+            <Value>=Parameters!StartDate.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@EndDate">
+            <Value>=Parameters!EndDate.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>SELECT Locations.name AS Station, r_departments.description As Dept, 
+(Products.plucode + ' - ' + Products.description) AS ProductDesc, 
+Sales.uGSBCard As GSBCard, Sales.CompletedDT As SaleDate, Salelines.qty As Qty, Salelines.totalprice As Amount 
+FROM Salelines INNER JOIN
+     Sales ON Salelines.Sid = Sales.Sid INNER JOIN
+     Products ON Salelines.Pid = Products.pid INNER JOIN
+     r_departments ON Products.r_depid = r_departments.depid INNER JOIN
+     Customers ON Sales.Cid = Customers.Cid INNER JOIN
+     Locations ON Sales.location = Locations.location_id
+WHERE (Sales.CompletedDT BETWEEN @StartDate AND @EndDate + 1)
+AND (Customers.cid = 306429)
+AND (Sales.Phase = 1) 
+AND (products.pid in (select pid from pricemaps where cid = 306429))
+ORDER BY r_departments.description, Products.plucode</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="Station">
+          <DataField>Station</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Dept">
+          <DataField>Dept</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ProductDesc">
+          <DataField>ProductDesc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="GSBCard">
+          <DataField>GSBCard</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SaleDate">
+          <DataField>SaleDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Qty">
+          <DataField>Qty</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Amount">
+          <DataField>Amount</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="PLUCodeList">
+      <Query>
+        <DataSourceName>VTNZSharedDataSource</DataSourceName>
+        <CommandText>DECLARE @pluCodeList dbo.uPLUCodeList
+INSERT INTO @pluCodeList
+SELECT plucode
+FROM dbo.Products
+WHERE pid IN (select pid from pricemaps where cid = 306429)
+
+SELECT dbo.ConvertPluCodeList(@pluCodeList)</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="Result">
+          <DataField />
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
   <ReportParameters>
     <ReportParameter Name="StartDate">
       <DataType>DateTime</DataType>
@@ -1734,16 +1798,8 @@ ORDER BY r_departments.description, Products.plucode</CommandText>
       <Prompt>End Date</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>11.27083in</Width>
-  <Page>
-    <LeftMargin>1in</LeftMargin>
-    <RightMargin>1in</RightMargin>
-    <TopMargin>1in</TopMargin>
-    <BottomMargin>1in</BottomMargin>
-    <Style />
-  </Page>
   <Language>en-US</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
-  <rd:ReportID>de019c97-da3f-4cb8-bd77-ab5657991baa</rd:ReportID>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>de019c97-da3f-4cb8-bd77-ab5657991baa</rd:ReportID>
 </Report>

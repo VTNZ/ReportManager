@@ -1,196 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
-  <DataSources>
-    <DataSource Name="VTNZSharedDataSource">
-      <DataSourceReference>VTNZSharedDataSource</DataSourceReference>
-      <rd:DataSourceID>191d2f58-6895-491b-a678-8148f29b8319</rd:DataSourceID>
-      <rd:SecurityType>None</rd:SecurityType>
-    </DataSource>
-  </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet1">
-      <Fields>
-        <Field Name="Branch">
-          <DataField>Branch</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Location">
-          <DataField>Location</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="WF1">
-          <DataField>WF1</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="OIL">
-          <DataField>OIL</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="TotalPrice">
-          <DataField>TotalPrice</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>VTNZSharedDataSource</DataSourceName>
-        <CommandText>drop table uTEMP_WoFPlusTopUp1
-;
-create table uTEMP_WoFPlusTopUp1 (
-Branch char(32),
-Location char(50),
-VolumeWF1 int,
-TotalPriceWF1 money,
-VolumeOIL int,
-TotalPriceOIL money)
-;
-insert into uTEMP_WoFPlusTopUp1
-select branch.description As Branch, locations.name As Location, 
-       sum(salelines.qty) As VolumeWF1, sum(salelines.totalprice) As TotalPriceWF1,
-       0 As VolumeOIL, 0 As TotalPriceOIL
-from branch, locations, sales, salelines, products, r_departments
-where branch.branch = locations.branch
-  and locations.location_id = sales.location
-  and sales.sid = salelines.sid
-  and salelines.pid = products.pid
-  and products.r_depid = r_departments.depid
-  and (Sales.CompletedDT BETWEEN @StartDate AND (@EndDate + 1))
-  and products.pid in (63)
-  and sales.phase = 1
-  and sales.phys_location = 127
-group by branch.description, locations.name
-order by branch.description, locations.name
-;
-insert into uTEMP_WoFPlusTopUp1
-select branch.description As Branch, locations.name As Location, 
-       0 As VolumeWF1, 0 As TotalPriceWF1, sum(salelines.qty) As VolumeOIL, sum(salelines.totalprice) As TotalPriceOIL
-from branch, locations, sales, salelines, products, r_departments
-where branch.branch = locations.branch
-  and locations.location_id = sales.location
-  and sales.sid = salelines.sid
-  and salelines.pid = products.pid
-  and products.r_depid = r_departments.depid
-  and (Sales.CompletedDT BETWEEN @StartDate AND (@EndDate + 1))
-  and products.pid in (410,411,412,661)
-  and sales.phase = 1
-  and sales.phys_location = 127
-group by branch.description, locations.name
-order by branch.description, locations.name
-;
-select Branch, Location, sum(VolumeWF1) As WF1, sum(VolumeOIL) As OIL, sum(TotalPriceWF1 + TotalPriceOIL) As TotalPrice
-from uTEMP_WoFPlusTopUp1
-group by uTEMP_WoFPlusTopUp1.Branch, uTEMP_WoFPlusTopUp1.Location
-order by uTEMP_WoFPlusTopUp1.Branch, uTEMP_WoFPlusTopUp1.Location</CommandText>
-        <QueryParameters>
-          <QueryParameter Name="@StartDate">
-            <Value>=Parameters!StartDate.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@EndDate">
-            <Value>=Parameters!EndDate.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-    <DataSet Name="Staff">
-      <Fields>
-        <Field Name="Staff">
-          <DataField>Staff</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="WoFPlusTopUp">
-          <DataField>WoFPlusTopUp</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>VTNZSharedDataSource</DataSourceName>
-        <CommandText>drop table uTEMP_WoFPlusTopUp4
-drop table uTEMP_WoFPlusTopUp5
-drop table uTEMP_WoFPlusTopUp6
-;
-create table uTEMP_WoFPlusTopUp5 (
-Branch char(32),
-Location char(50),
-Staff char(100),
-VolumeWF1 int,
-TotalPriceWF1 money,
-VolumeOIL int,
-TotalPriceOIL money)
-;
-insert into uTEMP_WoFPlusTopUp5
-select branch.description As Branch, locations.name As Location, employees.shortname As Staff, 
-       sum(salelines.qty) As VolumeWF1, sum(salelines.totalprice) As TotalPriceWF1,
-       0 As VolumeOIL, 0 As TotalPriceOIL
-from branch, locations, sales, products, r_departments,
-     salelines LEFT OUTER JOIN employees ON employees.eeid = salelines.sale_eeid
-where branch.branch = locations.branch
-  and locations.location_id = sales.location
-  and sales.sid = salelines.sid
-  and salelines.pid = products.pid
-  and products.r_depid = r_departments.depid
-  and (Sales.CompletedDT BETWEEN @StartDate AND (@EndDate + 1))
-  and products.pid in (63)
-  and sales.phase = 1
-  and sales.phys_location = 127
-group by branch.description, locations.name, employees.shortname
-order by branch.description, locations.name, employees.shortname
-;
-insert into uTEMP_WoFPlusTopUp5
-select branch.description As Branch, locations.name As Location, employees.shortname As Staff, 
-       0 As VolumeWF1, 0 As TotalPriceWF1, sum(salelines.qty) As VolumeOIL, sum(salelines.totalprice) As TotalPriceOIL
-from branch, locations, sales, products, r_departments,
-     salelines LEFT OUTER JOIN employees ON employees.eeid = salelines.sale_eeid
-where branch.branch = locations.branch
-  and locations.location_id = sales.location
-  and sales.sid = salelines.sid
-  and salelines.pid = products.pid
-  and products.r_depid = r_departments.depid
-  and (Sales.CompletedDT BETWEEN @StartDate AND (@EndDate + 1))
-  and products.pid in (410,411,412,661)
-  and sales.phase = 1
-  and sales.phys_location = 127
-group by branch.description, locations.name, employees.shortname
-order by branch.description, locations.name, employees.shortname
-;
-create table uTEMP_WoFPlusTopUp4 (
-Staff char(100),
-WF1 decimal(18,2),
-OIL decimal(18,2))
-;
-insert into uTEMP_WoFPlusTopUp4
-select Staff, sum(VolumeWF1), sum(VolumeOIL)
-from uTEMP_WoFPlusTopUp5
-group by uTEMP_WoFPlusTopUp5.Staff
-order by uTEMP_WoFPlusTopUp5.Staff
-;
-create table uTEMP_WoFPlusTopUp6 (
-Staff char(100),
-WoFPlusTopUp decimal(18,2),
-Rate decimal(18,2))
-;
-insert into uTEMP_WoFPlusTopUp6
-select Staff, sum(OIL), (sum(WF1) / sum(OIL))
-from uTEMP_WoFPlusTopUp4
-where OIL &gt; 0
-group by uTEMP_WoFPlusTopUp4.Staff
-order by (sum(WF1) / sum(OIL))
-;
-select Staff As Staff, WoFPlusTopUp As WoFPlusTopUp
-from uTEMP_WoFPlusTopUp6
---where WoFPlusTopUp &gt; 8
---and Rate &lt; 11</CommandText>
-        <QueryParameters>
-          <QueryParameter Name="@StartDate">
-            <Value>=Parameters!StartDate.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@EndDate">
-            <Value>=Parameters!EndDate.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-  </DataSets>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
       <Tablix Name="table1">
@@ -1442,26 +1251,6 @@ SUM(CInt(iif(Fields!OIL.Value &lt;&gt; 0, Fields!OIL.Value, 0))))</Value>
     <Height>1.49125in</Height>
     <Style />
   </Body>
-  <ReportParameters>
-    <ReportParameter Name="StartDate">
-      <DataType>DateTime</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>=DateAdd("d",-7,Today())</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>Start Date</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="EndDate">
-      <DataType>DateTime</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>=DateAdd("d",-1,Today())</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>End Date</Prompt>
-    </ReportParameter>
-  </ReportParameters>
   <Width>6.34723in</Width>
   <Page>
     <PageHeader>
@@ -1834,8 +1623,255 @@ SUM(CInt(iif(Fields!OIL.Value &lt;&gt; 0, Fields!OIL.Value, 0))))</Value>
     <BottomMargin>1in</BottomMargin>
     <Style />
   </Page>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="VTNZSharedDataSource">
+      <DataSourceReference>VTNZSharedDataSource</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>191d2f58-6895-491b-a678-8148f29b8319</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>VTNZSharedDataSource</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@StartDate">
+            <Value>=Parameters!StartDate.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@EndDate">
+            <Value>=Parameters!EndDate.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>declare @WoFPlusTopUp1 table
+(
+	Branch char(32),
+	Location char(50),
+	VolumeWF1 int,
+	TotalPriceWF1 money,
+	VolumeOIL int,
+	TotalPriceOIL money
+)
+;
+insert into @WoFPlusTopUp1
+select
+	branch.description As Branch
+	, locations.name As Location
+	, sum(salelines.qty) As VolumeWF1
+	, sum(salelines.totalprice) As TotalPriceWF1
+	, 0 As VolumeOIL
+	, 0 As TotalPriceOIL
+from branch
+inner join locations on branch.branch = locations.branch
+inner join sales on locations.location_id = sales.location
+inner join salelines on sales.sid = salelines.sid
+inner join products on salelines.pid = products.pid
+inner join r_departments on products.r_depid = r_departments.depid
+where (Sales.CompletedDT BETWEEN @StartDate AND (@EndDate + 1))
+  and products.pid in (63)
+  and sales.phase = 1
+  and sales.phys_location = 127
+group by branch.description, locations.name
+order by branch.description, locations.name
+;
+insert into @WoFPlusTopUp1
+select
+	branch.description As Branch
+	, locations.name As Location
+	, 0 As VolumeWF1
+	, 0 As TotalPriceWF1
+	, sum(salelines.qty) As VolumeOIL
+	, sum(salelines.totalprice) As TotalPriceOIL
+from branch
+inner join locations on branch.branch = locations.branch
+inner join sales on locations.location_id = sales.location
+inner join salelines on sales.sid = salelines.sid
+inner join products on salelines.pid = products.pid
+inner join r_departments on products.r_depid = r_departments.depid
+where (Sales.CompletedDT BETWEEN @StartDate AND (@EndDate + 1))
+  and products.pid in (select pid from uFMISProducts where WOF_plus_top_up = 'Y')
+  and sales.phase = 1
+  and sales.phys_location = 127
+group by branch.description, locations.name
+order by branch.description, locations.name
+;
+select Branch, Location, sum(VolumeWF1) As WF1, sum(VolumeOIL) As OIL, sum(TotalPriceWF1 + TotalPriceOIL) As TotalPrice
+from @WoFPlusTopUp1
+group by Branch, Location
+order by Branch, Location</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="Branch">
+          <DataField>Branch</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Location">
+          <DataField>Location</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="WF1">
+          <DataField>WF1</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="OIL">
+          <DataField>OIL</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="TotalPrice">
+          <DataField>TotalPrice</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="Staff">
+      <Query>
+        <DataSourceName>VTNZSharedDataSource</DataSourceName>
+        <CommandText>declare @StartDate datetime
+declare @EndDate datetime
+
+set @StartDate = '1/May/2016'
+set @EndDate = '31/May/2016'
+
+declare @WoFPlusTopUp5 table
+(
+	Branch char(32),
+	Location char(50),
+	Staff char(100),
+	VolumeWF1 int,
+	TotalPriceWF1 money,
+	VolumeOIL int,
+	TotalPriceOIL money
+)
+;
+insert into @WoFPlusTopUp5
+select
+	branch.description As Branch
+	, locations.name As Location
+	, employees.shortname As Staff
+	, sum(salelines.qty) As VolumeWF1
+	, sum(salelines.totalprice) As TotalPriceWF1
+	, 0 As VolumeOIL
+	, 0 As TotalPriceOIL
+from branch
+inner join locations on branch.branch = locations.branch
+inner join sales on locations.location_id = sales.location
+inner join salelines on sales.sid = salelines.sid
+inner join products on salelines.pid = products.pid
+inner join r_departments on products.r_depid = r_departments.depid
+LEFT OUTER JOIN employees ON employees.eeid = salelines.sale_eeid
+where branch.branch = locations.branch
+  and locations.location_id = sales.location
+  and sales.sid = salelines.sid
+  and salelines.pid = products.pid
+  and products.r_depid = r_departments.depid
+  and (Sales.CompletedDT BETWEEN @StartDate AND (@EndDate + 1))
+  and products.pid in (63)
+  and sales.phase = 1
+  and sales.phys_location = 127
+group by
+	branch.description
+	, locations.name
+	, employees.shortname
+order by
+	branch.description
+	, locations.name
+	, employees.shortname
+;
+insert into @WoFPlusTopUp5
+select
+	branch.description As Branch
+	, locations.name As Location
+	, employees.shortname As Staff
+	, 0 As VolumeWF1
+	, 0 As TotalPriceWF1
+	, sum(salelines.qty) As VolumeOIL
+	, sum(salelines.totalprice) As TotalPriceOIL
+from branch
+inner join locations on branch.branch = locations.branch
+inner join sales on locations.location_id = sales.location
+inner join salelines on sales.sid = salelines.sid
+inner join products on salelines.pid = products.pid
+inner join r_departments on products.r_depid = r_departments.depid
+LEFT OUTER JOIN employees ON employees.eeid = salelines.sale_eeid
+where (Sales.CompletedDT BETWEEN @StartDate AND (@EndDate + 1))
+  and products.pid in (select pid from uFMISProducts where WOF_plus_top_up = 'Y')
+  and sales.phase = 1
+  and sales.phys_location = 127
+group by branch.description, locations.name, employees.shortname
+order by branch.description, locations.name, employees.shortname
+;
+declare @WoFPlusTopUp4 table
+(
+	Staff char(100),
+	WF1 decimal(18,2),
+	OIL decimal(18,2)
+)
+;
+insert into @WoFPlusTopUp4
+select Staff, sum(VolumeWF1), sum(VolumeOIL)
+from @WoFPlusTopUp5
+group by Staff
+order by Staff
+;
+declare @WoFPlusTopUp6 table
+(
+	Staff char(100),
+	WoFPlusTopUp decimal(18,2),
+	Rate decimal(18,2)
+)
+;
+insert into @WoFPlusTopUp6
+select Staff, sum(OIL), (sum(WF1) / sum(OIL))
+from @WoFPlusTopUp4
+where OIL &gt; 0
+group by Staff
+order by (sum(WF1) / sum(OIL))
+;
+select Staff As Staff, WoFPlusTopUp As WoFPlusTopUp
+from @WoFPlusTopUp6
+
+select count(*) from @WoFPlusTopUp4
+select count(*) from @WoFPlusTopUp5
+select count(*) from @WoFPlusTopUp6
+--where WoFPlusTopUp &gt; 8
+--and Rate &lt; 11</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="Staff">
+          <DataField>Staff</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="WoFPlusTopUp">
+          <DataField>WoFPlusTopUp</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportParameters>
+    <ReportParameter Name="StartDate">
+      <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>=DateAdd("d",-7,Today())</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Start Date</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="EndDate">
+      <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>=DateAdd("d",-1,Today())</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>End Date</Prompt>
+    </ReportParameter>
+  </ReportParameters>
   <Language>en-US</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
-  <rd:ReportID>5dddfb20-795f-4d13-93ec-4e5448ad819c</rd:ReportID>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>5dddfb20-795f-4d13-93ec-4e5448ad819c</rd:ReportID>
 </Report>

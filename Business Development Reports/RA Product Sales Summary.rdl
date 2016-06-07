@@ -1,200 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
-  <DataSources>
-    <DataSource Name="VTNZSharedDataSource">
-      <DataSourceReference>VTNZSharedDataSource</DataSourceReference>
-      <rd:DataSourceID>89f1c51e-f527-4d54-81f5-bb21813122de</rd:DataSourceID>
-      <rd:SecurityType>None</rd:SecurityType>
-    </DataSource>
-  </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet1">
-      <Fields>
-        <Field Name="Branch">
-          <DataField>Branch</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Location">
-          <DataField>Location</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Staff">
-          <DataField>Staff</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Volume">
-          <DataField>Volume</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="TotalPrice">
-          <DataField>TotalPrice</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>VTNZSharedDataSource</DataSourceName>
-        <CommandText>select branch.description As Branch, locations.name As Location, (Rtrim(firstname) + ' ' + RTrim(lastname)) As Staff, 
-       sum(salelines.qty) As Volume, sum(salelines.totalprice) As TotalPrice
-from branch, locations, sales, salelines, products, staff, r_departments
-where branch.branch = locations.branch
-  and locations.location_id = sales.location
-  and sales.sid = salelines.sid
-  and salelines.pid = products.pid
-  and products.r_depid = r_departments.depid
-  and sales.teller = staff.tid
-  and (Sales.CompletedDT BETWEEN @StartDate AND (@EndDate + 1))
-  and products.r_depid = 26
-  and sales.phase = 1
-group by branch.description, locations.name, staff.firstname, staff.lastname
-order by branch.description, locations.name, firstname, lastname</CommandText>
-        <QueryParameters>
-          <QueryParameter Name="@StartDate">
-            <Value>=Parameters!StartDate.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@EndDate">
-            <Value>=Parameters!EndDate.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-    <DataSet Name="Locations">
-      <Fields>
-        <Field Name="Location">
-          <DataField>Location</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Volume">
-          <DataField>Volume</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>VTNZSharedDataSource</DataSourceName>
-        <CommandText>drop table uTEMP_RA1
-;
-create table uTEMP_RA1 (
-Location char(50),
-Volume int)
-;
-insert into uTEMP_RA1
-select locations.name As Location, sum(salelines.qty) As Volume
-from branch, locations, sales, salelines, products, r_departments
-where branch.branch = locations.branch
-  and locations.location_id = sales.location
-  and sales.sid = salelines.sid
-  and salelines.pid = products.pid
-  and products.r_depid = r_departments.depid
-  and (Sales.CompletedDT BETWEEN @StartDate AND (@EndDate + 1))
-  and products.r_depid = 26
-  and sales.phase = 1
-group by locations.name
-order by sum(salelines.qty) desc
-;
-select TOP 6 Volume As Volume, Location As Location
-from uTEMP_RA1</CommandText>
-        <QueryParameters>
-          <QueryParameter Name="@StartDate">
-            <Value>=Parameters!StartDate.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@EndDate">
-            <Value>=Parameters!EndDate.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-    <DataSet Name="Staff">
-      <Fields>
-        <Field Name="Volume">
-          <DataField>Volume</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Staff">
-          <DataField>Staff</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>VTNZSharedDataSource</DataSourceName>
-        <CommandText>drop table uTEMP_RA2
-;
-create table uTEMP_RA2 (
-Staff char(100),
-Volume int)
-;
-insert into uTEMP_RA2
-select (Rtrim(firstname) + ' ' + RTrim(lastname)) As Staff, sum(salelines.qty) As Volume
-from branch, locations, sales, salelines, products, staff, r_departments
-where branch.branch = locations.branch
-  and locations.location_id = sales.location
-  and sales.sid = salelines.sid
-  and salelines.pid = products.pid
-  and products.r_depid = r_departments.depid
-  and sales.teller = staff.tid
-  and (Sales.CompletedDT BETWEEN @StartDate AND (@EndDate + 1))
-  and products.r_depid = 26
-  and sales.phase = 1
-group by staff.firstname, staff.lastname
-order by firstname, lastname
-;
-select TOP 8 Volume As Volume, Staff As Staff
-from uTEMP_RA2
-order by Volume desc</CommandText>
-        <QueryParameters>
-          <QueryParameter Name="@StartDate">
-            <Value>=Parameters!StartDate.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@EndDate">
-            <Value>=Parameters!EndDate.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-    <DataSet Name="Products">
-      <Fields>
-        <Field Name="Plucode">
-          <DataField>Plucode</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Product">
-          <DataField>Product</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Volume">
-          <DataField>Volume</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>VTNZSharedDataSource</DataSourceName>
-        <CommandText>select products.plucode As Plucode, products.description As Product,
-       sum(salelines.qty) As Volume
-from branch, locations, sales, salelines, products, staff, r_departments
-where branch.branch = locations.branch
-  and locations.location_id = sales.location
-  and sales.sid = salelines.sid
-  and salelines.pid = products.pid
-  and products.r_depid = r_departments.depid
-  and sales.teller = staff.tid
-  and (Sales.CompletedDT BETWEEN @StartDate AND (@EndDate + 1))
-  and products.r_depid = 26
-  and sales.phase = 1
-group by products.plucode, products.description
-order by sum(salelines.qty) desc</CommandText>
-        <QueryParameters>
-          <QueryParameter Name="@StartDate">
-            <Value>=Parameters!StartDate.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@EndDate">
-            <Value>=Parameters!EndDate.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-  </DataSets>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
       <Tablix Name="table1">
@@ -1965,16 +1770,6 @@ order by sum(salelines.qty) desc</CommandText>
     <Height>3.65459in</Height>
     <Style />
   </Body>
-  <ReportParameters>
-    <ReportParameter Name="StartDate">
-      <DataType>DateTime</DataType>
-      <Prompt>Start Date</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="EndDate">
-      <DataType>DateTime</DataType>
-      <Prompt>End Date</Prompt>
-    </ReportParameter>
-  </ReportParameters>
   <Width>10.11462in</Width>
   <Page>
     <PageHeader>
@@ -2348,8 +2143,223 @@ order by sum(salelines.qty) desc</CommandText>
     <BottomMargin>1in</BottomMargin>
     <Style />
   </Page>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="VTNZSharedDataSource">
+      <DataSourceReference>VTNZSharedDataSource</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>89f1c51e-f527-4d54-81f5-bb21813122de</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>VTNZSharedDataSource</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@StartDate">
+            <Value>=Parameters!StartDate.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@EndDate">
+            <Value>=Parameters!EndDate.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>select branch.description As Branch, locations.name As Location, (Rtrim(firstname) + ' ' + RTrim(lastname)) As Staff, 
+       sum(salelines.qty) As Volume, sum(salelines.totalprice) As TotalPrice
+from branch, locations, sales, salelines, products, staff, r_departments
+where branch.branch = locations.branch
+  and locations.location_id = sales.location
+  and sales.sid = salelines.sid
+  and salelines.pid = products.pid
+  and products.r_depid = r_departments.depid
+  and sales.teller = staff.tid
+  and (Sales.CompletedDT BETWEEN @StartDate AND (@EndDate + 1))
+  and products.r_depid = 26
+  and sales.phase = 1
+group by branch.description, locations.name, staff.firstname, staff.lastname
+order by branch.description, locations.name, firstname, lastname</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="Branch">
+          <DataField>Branch</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Location">
+          <DataField>Location</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Staff">
+          <DataField>Staff</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Volume">
+          <DataField>Volume</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="TotalPrice">
+          <DataField>TotalPrice</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="Locations">
+      <Query>
+        <DataSourceName>VTNZSharedDataSource</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@StartDate">
+            <Value>=Parameters!StartDate.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@EndDate">
+            <Value>=Parameters!EndDate.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>declare @temp_ra2 table
+(
+	Staff char(100),
+	Volume int
+)
+;
+insert into @temp_ra2
+select
+	(Rtrim(firstname) + ' ' + RTrim(lastname)) As Staff
+	, sum(salelines.qty) As Volume
+from branch
+inner join locations on branch.branch = locations.branch
+inner join sales on locations.location_id = sales.location
+inner join salelines on sales.sid = salelines.sid
+inner join products on salelines.pid = products.pid
+inner join staff on sales.teller = staff.tid
+inner join r_departments on products.r_depid = r_departments.depid
+where (Sales.CompletedDT BETWEEN @StartDate AND (@EndDate + 1))
+  and products.r_depid = 26
+  and sales.phase = 1
+group by staff.firstname, staff.lastname
+order by firstname, lastname
+;
+select TOP 8 Volume As Volume, Staff As Staff
+from @temp_ra2
+order by Volume desc</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="Volume">
+          <DataField>Volume</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Staff">
+          <DataField>Staff</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="Staff">
+      <Query>
+        <DataSourceName>VTNZSharedDataSource</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@StartDate">
+            <Value>=Parameters!StartDate.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@EndDate">
+            <Value>=Parameters!EndDate.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>declare @temp_ra2 table
+(
+	Staff char(100),
+	Volume int
+)
+;
+insert into @temp_ra2
+select
+	(Rtrim(firstname) + ' ' + RTrim(lastname)) As Staff
+	, sum(salelines.qty) As Volume
+from branch
+inner join locations on branch.branch = locations.branch
+inner join sales on locations.location_id = sales.location
+inner join salelines on sales.sid = salelines.sid
+inner join products on salelines.pid = products.pid
+inner join staff on sales.teller = staff.tid
+inner join r_departments on products.r_depid = r_departments.depid
+where (Sales.CompletedDT BETWEEN @StartDate AND (@EndDate + 1))
+  and products.r_depid = 26
+  and sales.phase = 1
+group by staff.firstname, staff.lastname
+order by firstname, lastname
+;
+select TOP 8 Volume As Volume, Staff As Staff
+from @temp_ra2
+order by Volume desc</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="Volume">
+          <DataField>Volume</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Staff">
+          <DataField>Staff</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="Products">
+      <Query>
+        <DataSourceName>VTNZSharedDataSource</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@StartDate">
+            <Value>=Parameters!StartDate.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@EndDate">
+            <Value>=Parameters!EndDate.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>select
+	products.plucode As Plucode
+	, products.description As Product
+	, sum(salelines.qty) As Volume
+from branch
+inner join locations on branch.branch = locations.branch
+inner join sales on locations.location_id = sales.location
+inner join salelines on sales.sid = salelines.sid
+inner join products on salelines.pid = products.pid
+inner join staff on sales.teller = staff.tid
+inner join r_departments on products.r_depid = r_departments.depid
+where (Sales.CompletedDT BETWEEN @StartDate AND (@EndDate + 1))
+  and products.r_depid = 26
+  and sales.phase = 1
+group by products.plucode, products.description
+order by sum(salelines.qty) desc
+</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="Plucode">
+          <DataField>Plucode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Product">
+          <DataField>Product</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Volume">
+          <DataField>Volume</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportParameters>
+    <ReportParameter Name="StartDate">
+      <DataType>DateTime</DataType>
+      <Prompt>Start Date</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="EndDate">
+      <DataType>DateTime</DataType>
+      <Prompt>End Date</Prompt>
+    </ReportParameter>
+  </ReportParameters>
   <Language>en-US</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
-  <rd:ReportID>cb71c37a-918d-462e-b7c2-92e354f48d52</rd:ReportID>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>cb71c37a-918d-462e-b7c2-92e354f48d52</rd:ReportID>
 </Report>

@@ -1,96 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
-  <DataSources>
-    <DataSource Name="VTNZSharedDataSource">
-      <DataSourceReference>VTNZSharedDataSource</DataSourceReference>
-      <rd:DataSourceID>4f687566-7910-472b-bb63-41bdb58f5b22</rd:DataSourceID>
-      <rd:SecurityType>None</rd:SecurityType>
-    </DataSource>
-  </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet1">
-      <Fields>
-        <Field Name="Branch">
-          <DataField>Branch</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Location">
-          <DataField>Location</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Staff">
-          <DataField>Staff</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ProductGroup">
-          <DataField>ProductGroup</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Product">
-          <DataField>Product</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Volume">
-          <DataField>Volume</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="TotalPrice">
-          <DataField>TotalPrice</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>VTNZSharedDataSource</DataSourceName>
-        <CommandText>select branch.description As Branch, locations.name As Location, (Rtrim(firstname) + ' ' + RTrim(lastname)) As Staff, 
-       r_departments.description As ProductGroup, products.plucode As Product, 
-       sum(salelines.qty) As Volume, sum(salelines.totalprice) As TotalPrice
-from branch, locations, sales, salelines, products, staff, r_departments
-where branch.branch = locations.branch
-  and locations.location_id = sales.location
-  and sales.sid = salelines.sid
-  and salelines.pid = products.pid
-  and products.r_depid = r_departments.depid
-  and sales.teller = staff.tid
-  and (Sales.CompletedDT BETWEEN @StartDate AND @EndDate + 1)
-  and products.pid in (@ProductID)
-  and sales.phase = 1
-group by branch.description, locations.name, staff.firstname, staff.lastname, r_departments.description, products.plucode
-order by branch.description, locations.name, products.plucode desc</CommandText>
-        <QueryParameters>
-          <QueryParameter Name="@StartDate">
-            <Value>=Parameters!StartDate.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@EndDate">
-            <Value>=Parameters!EndDate.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@ProductID">
-            <Value>=Parameters!ProductID.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-    <DataSet Name="Products">
-      <Fields>
-        <Field Name="pid">
-          <DataField>pid</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="plucode">
-          <DataField>plucode</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>VTNZSharedDataSource</DataSourceName>
-        <CommandText>select pid, plucode
-from products
-where pid in (65,66,67,68,63,124,237,208)
-order by description</CommandText>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-  </DataSets>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
       <Tablix Name="table1">
@@ -1999,44 +1908,6 @@ SUM(CInt(iif(Fields!Product.Value = "WPLU", Fields!Volume.Value, 0))))</Value>
     <Height>1.35125in</Height>
     <Style />
   </Body>
-  <ReportParameters>
-    <ReportParameter Name="StartDate">
-      <DataType>DateTime</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>=DateAdd("d",-7,Today())</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>Start Date</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="EndDate">
-      <DataType>DateTime</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>=DateAdd("d",-1,Today())</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>End Date</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="ProductID">
-      <DataType>Integer</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>63</Value>
-          <Value>208</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>Product ID</Prompt>
-      <ValidValues>
-        <DataSetReference>
-          <DataSetName>Products</DataSetName>
-          <ValueField>pid</ValueField>
-          <LabelField>plucode</LabelField>
-        </DataSetReference>
-      </ValidValues>
-      <MultiValue>true</MultiValue>
-    </ReportParameter>
-  </ReportParameters>
   <Width>7.54167in</Width>
   <Page>
     <PageHeader>
@@ -2404,8 +2275,144 @@ SUM(CInt(iif(Fields!Product.Value = "WPLU", Fields!Volume.Value, 0))))</Value>
     <BottomMargin>1in</BottomMargin>
     <Style />
   </Page>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="VTNZSharedDataSource">
+      <DataSourceReference>VTNZSharedDataSource</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>4f687566-7910-472b-bb63-41bdb58f5b22</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>VTNZSharedDataSource</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@StartDate">
+            <Value>=Parameters!StartDate.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@EndDate">
+            <Value>=Parameters!EndDate.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@ProductID">
+            <Value>=Parameters!ProductID.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>select branch.description As Branch, locations.name As Location, (Rtrim(firstname) + ' ' + RTrim(lastname)) As Staff, 
+       r_departments.description As ProductGroup, products.plucode As Product, 
+       sum(salelines.qty) As Volume, sum(salelines.totalprice) As TotalPrice
+from branch, locations, sales, salelines, products, staff, r_departments
+where branch.branch = locations.branch
+  and locations.location_id = sales.location
+  and sales.sid = salelines.sid
+  and salelines.pid = products.pid
+  and products.r_depid = r_departments.depid
+  and sales.teller = staff.tid
+  and (Sales.CompletedDT BETWEEN @StartDate AND @EndDate + 1)
+  and products.pid in (@ProductID)
+  and sales.phase = 1
+group by branch.description, locations.name, staff.firstname, staff.lastname, r_departments.description, products.plucode
+order by branch.description, locations.name, products.plucode desc</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="Branch">
+          <DataField>Branch</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Location">
+          <DataField>Location</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Staff">
+          <DataField>Staff</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ProductGroup">
+          <DataField>ProductGroup</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Product">
+          <DataField>Product</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Volume">
+          <DataField>Volume</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="TotalPrice">
+          <DataField>TotalPrice</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="Products">
+      <Query>
+        <DataSourceName>VTNZSharedDataSource</DataSourceName>
+        <CommandText>SELECT        pid, plucode, plucode + ' (' + description + ')' AS plucodeDescription
+FROM            dbo.Products
+WHERE        (pid IN
+                             (SELECT        pid
+                               FROM            dbo.uFMISProducts
+                               WHERE        (WOF_Plus_Products = 'Y')))
+ORDER BY description</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="pid">
+          <DataField>pid</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="plucode">
+          <DataField>plucode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="plucodeDescription">
+          <DataField>plucodeDescription</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportParameters>
+    <ReportParameter Name="StartDate">
+      <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>=DateAdd("d",-7,Today())</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Start Date</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="EndDate">
+      <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>=DateAdd("d",-1,Today())</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>End Date</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ProductID">
+      <DataType>Integer</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>63</Value>
+          <Value>208</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Product ID</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>Products</DataSetName>
+          <ValueField>pid</ValueField>
+          <LabelField>plucode</LabelField>
+        </DataSetReference>
+      </ValidValues>
+      <MultiValue>true</MultiValue>
+    </ReportParameter>
+  </ReportParameters>
   <Language>en-US</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
-  <rd:ReportID>36f69c05-17ac-45eb-bb14-d3ec6d567442</rd:ReportID>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>36f69c05-17ac-45eb-bb14-d3ec6d567442</rd:ReportID>
 </Report>
