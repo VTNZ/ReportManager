@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ToolsVersion="2.0">
+  <State>$base64$PFNvdXJjZUNvbnRyb2xJbmZvIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOmRkbDI9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDAzL2VuZ2luZS8yIiB4bWxuczpkZGwyXzI9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDAzL2VuZ2luZS8yLzIiIHhtbG5zOmRkbDEwMF8xMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDA4L2VuZ2luZS8xMDAvMTAwIiB4bWxuczpkZGwyMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEwL2VuZ2luZS8yMDAiIHhtbG5zOmRkbDIwMF8yMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEwL2VuZ2luZS8yMDAvMjAwIiB4bWxuczpkZGwzMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDExL2VuZ2luZS8zMDAiIHhtbG5zOmRkbDMwMF8zMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDExL2VuZ2luZS8zMDAvMzAwIiB4bWxuczpkZGw0MDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEyL2VuZ2luZS80MDAiIHhtbG5zOmRkbDQwMF80MDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEyL2VuZ2luZS80MDAvNDAwIiB4bWxuczpkZGw1MDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEzL2VuZ2luZS81MDAiIHhtbG5zOmRkbDUwMF81MDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEzL2VuZ2luZS81MDAvNTAwIiB4bWxuczpkd2Q9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vRGF0YVdhcmVob3VzZS9EZXNpZ25lci8xLjAiPg0KICA8RW5hYmxlZD5mYWxzZTwvRW5hYmxlZD4NCiAgPFByb2plY3ROYW1lPjwvUHJvamVjdE5hbWU+DQogIDxBdXhQYXRoPjwvQXV4UGF0aD4NCiAgPExvY2FsUGF0aD48L0xvY2FsUGF0aD4NCiAgPFByb3ZpZGVyPjwvUHJvdmlkZXI+DQo8L1NvdXJjZUNvbnRyb2xJbmZvPg==</State>
+  <DataSources>
+    <ProjectItem>
+      <Name>VTNZSharedDataSource.rds</Name>
+      <FullPath>VTNZSharedDataSource.rds</FullPath>
+    </ProjectItem>
+  </DataSources>
+  <DataSets />
+  <Reports>
+    <ProjectItem>
+      <Name>WoF Plus Top Up Incentives.rdl</Name>
+      <FullPath>WoF Plus Top Up Incentives.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Agency Transactions by Date.rdl</Name>
+      <FullPath>Agency Transactions by Date.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Business Development Dashboard.rdl</Name>
+      <FullPath>Business Development Dashboard.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Company Volumes.rdl</Name>
+      <FullPath>Company Volumes.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Credits on Customer Accounts Report.rdl</Name>
+      <FullPath>Credits on Customer Accounts Report.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Customer Revenue - Volumes by Product Group.rdl</Name>
+      <FullPath>Customer Revenue - Volumes by Product Group.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Customer Transactions by Station by Product.rdl</Name>
+      <FullPath>Customer Transactions by Station by Product.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Customer Volumes by Product.rdl</Name>
+      <FullPath>Customer Volumes by Product.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Daily Discount Report.rdl</Name>
+      <FullPath>Daily Discount Report.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Daily Expired WoFs per Station.rdl</Name>
+      <FullPath>Daily Expired WoFs per Station.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Discount and Checksheet Returns by Product Group by Station by Month.rdl</Name>
+      <FullPath>Discount and Checksheet Returns by Product Group by Station by Month.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Finance - Agency Transactions by Date.rdl</Name>
+      <FullPath>Finance - Agency Transactions by Date.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Fleet and Drive Card Transactions.rdl</Name>
+      <FullPath>Fleet and Drive Card Transactions.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>GrabOne Vouchers Redeemed - OTG.rdl</Name>
+      <FullPath>GrabOne Vouchers Redeemed - OTG.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>GSB Accounts Product Sales.rdl</Name>
+      <FullPath>GSB Accounts Product Sales.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Kidscan Xmas Crackers.rdl</Name>
+      <FullPath>Kidscan Xmas Crackers.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Midday Cash Flow.rdl</Name>
+      <FullPath>Midday Cash Flow.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>OTG Stock at Cost Report.rdl</Name>
+      <FullPath>OTG Stock at Cost Report.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>OTG Total Sales Report.rdl</Name>
+      <FullPath>OTG Total Sales Report.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>OTG Volumes by Product Group per Month.rdl</Name>
+      <FullPath>OTG Volumes by Product Group per Month.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Product Sales by Teller.rdl</Name>
+      <FullPath>Product Sales by Teller.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Products Cost Price Report - OTG.rdl</Name>
+      <FullPath>Products Cost Price Report - OTG.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Products Cost Price Report.rdl</Name>
+      <FullPath>Products Cost Price Report.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Qty Costs by Station Excl Outwork.rdl</Name>
+      <FullPath>Qty Costs by Station Excl Outwork.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Qty Costs by Station.rdl</Name>
+      <FullPath>Qty Costs by Station.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Redeemed Vouchers.rdl</Name>
+      <FullPath>Redeemed Vouchers.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Sales by Location by Product Group.rdl</Name>
+      <FullPath>Sales by Location by Product Group.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Sales Receipt by Sale ID Report (showing discount).rdl</Name>
+      <FullPath>Sales Receipt by Sale ID Report (showing discount).rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Sales Receipt by Sale ID Report.rdl</Name>
+      <FullPath>Sales Receipt by Sale ID Report.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Sales Revenue.rdl</Name>
+      <FullPath>Sales Revenue.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Staff Incentive Battery Product.rdl</Name>
+      <FullPath>Staff Incentive Battery Product.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Staff Incentive GPS and ACTU products.rdl</Name>
+      <FullPath>Staff Incentive GPS and ACTU products.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Staff Incentive GPS Product.rdl</Name>
+      <FullPath>Staff Incentive GPS Product.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Staff Incentive Products - Xmas Combo.rdl</Name>
+      <FullPath>Staff Incentive Products - Xmas Combo.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Staff Incentive Products.rdl</Name>
+      <FullPath>Staff Incentive Products.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Station Business Development Dashboard.rdl</Name>
+      <FullPath>Station Business Development Dashboard.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Station Daily Volumes Matrix.rdl</Name>
+      <FullPath>Station Daily Volumes Matrix.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Stock at Cost Report by Supplier.rdl</Name>
+      <FullPath>Stock at Cost Report by Supplier.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Stock at Cost Report.rdl</Name>
+      <FullPath>Stock at Cost Report.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>STP Listing - OTG.rdl</Name>
+      <FullPath>STP Listing - OTG.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>STP Listing by Customer.rdl</Name>
+      <FullPath>STP Listing by Customer.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>STP Listing.rdl</Name>
+      <FullPath>STP Listing.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>STP Sales.rdl</Name>
+      <FullPath>STP Sales.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Superdocket Redemption.rdl</Name>
+      <FullPath>Superdocket Redemption.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Total Sales by Location.rdl</Name>
+      <FullPath>Total Sales by Location.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Total Sales by Outwork Location.rdl</Name>
+      <FullPath>Total Sales by Outwork Location.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Total Sales by Parent Locations.rdl</Name>
+      <FullPath>Total Sales by Parent Locations.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Total Sales for Discount Reporting.rdl</Name>
+      <FullPath>Total Sales for Discount Reporting.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Transactions by Payment Type.rdl</Name>
+      <FullPath>Transactions by Payment Type.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Volumes by Product Group per Month.rdl</Name>
+      <FullPath>Volumes by Product Group per Month.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>WoF Plus Top Up Incentives- WoF Valet.rdl</Name>
+      <FullPath>WoF Plus Top Up Incentives- WoF Valet.rdl</FullPath>
+    </ProjectItem>
+  </Reports>
+  <Configurations>
+    <Configuration>
+      <Name>Debug</Name>
+      <Platform>Win32</Platform>
+      <Options>
+        <OutputPath>bin\Debug</OutputPath>
+        <TargetServerVersion>SSRS2008R2</TargetServerVersion>
+        <TargetFolder>FinanceReports</TargetFolder>
+        <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
+        <TargetDatasetFolder>Datasets</TargetDatasetFolder>
+        <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
+      </Options>
+    </Configuration>
+    <Configuration>
+      <Name>DebugLocal</Name>
+      <Platform>Win32</Platform>
+      <Options>
+        <OutputPath>bin\DebugLocal</OutputPath>
+        <TargetServerVersion>SSRS2008R2</TargetServerVersion>
+        <TargetFolder>FinanceReports</TargetFolder>
+        <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
+        <TargetDatasetFolder>Datasets</TargetDatasetFolder>
+        <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
+      </Options>
+    </Configuration>
+    <Configuration>
+      <Name>Release</Name>
+      <Platform>Win32</Platform>
+      <Options>
+        <OutputPath>bin\Release</OutputPath>
+        <TargetServerVersion>SSRS2008R2</TargetServerVersion>
+        <TargetFolder>FinanceReports</TargetFolder>
+        <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
+        <TargetDatasetFolder>Datasets</TargetDatasetFolder>
+        <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
+      </Options>
+    </Configuration>
+  </Configurations>
+</Project>
