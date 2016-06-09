@@ -52,7 +52,7 @@
       <Platform>Win32</Platform>
       <Options>
         <OutputPath>bin\Debug</OutputPath>
-        <TargetServerVersion>SSRS2016</TargetServerVersion>
+        <TargetServerVersion>SSRS2008</TargetServerVersion>
         <TargetServerURL>http://localhost/reportserver</TargetServerURL>
         <TargetFolder>Finance Reports - Adaptive Planning</TargetFolder>
         <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>

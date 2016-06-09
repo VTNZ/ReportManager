@@ -108,6 +108,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{99132AD0-A004-44B5-9732-05717CAB27AE}"
 	ProjectSection(SolutionItems) = preProject
 		DownloadReports.ps = DownloadReports.ps
+		ReadMe.txt = ReadMe.txt
 	EndProjectSection
 EndProject
 Global

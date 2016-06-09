@@ -20,7 +20,7 @@
       <Platform>Win32</Platform>
       <Options>
         <OutputPath>bin\Debug</OutputPath>
-        <TargetServerVersion>SSRS2016</TargetServerVersion>
+        <TargetServerVersion>SSRS2008</TargetServerVersion>
         <TargetServerURL>http://localhost/reportserver</TargetServerURL>
         <TargetFolder>BST Reports - Fly Buys Reports</TargetFolder>
         <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>

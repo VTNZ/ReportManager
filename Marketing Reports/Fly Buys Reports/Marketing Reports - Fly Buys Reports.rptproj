@@ -64,7 +64,7 @@
       <Platform>Win32</Platform>
       <Options>
         <OutputPath>bin\Debug</OutputPath>
-        <TargetServerVersion>SSRS2008R2</TargetServerVersion>
+        <TargetServerVersion>SSRS2008</TargetServerVersion>
         <TargetFolder>Fly Buys Reports</TargetFolder>
         <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
         <TargetDatasetFolder>Datasets</TargetDatasetFolder>

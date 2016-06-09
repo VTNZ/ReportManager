@@ -56,7 +56,7 @@
       <Platform>Win32</Platform>
       <Options>
         <OutputPath>bin\Debug</OutputPath>
-        <TargetServerVersion>SSRS2008R2</TargetServerVersion>
+        <TargetServerVersion>SSRS2008</TargetServerVersion>
         <TargetFolder>Wellington Reports</TargetFolder>
         <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
         <TargetDatasetFolder>Datasets</TargetDatasetFolder>

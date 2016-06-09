@@ -10,6 +10,10 @@
   <DataSets />
   <Reports>
     <ProjectItem>
+      <Name>Customer Capture Scoreboard by Teller.rdl</Name>
+      <FullPath>Customer Capture Scoreboard by Teller.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Customer COF Recheck History.rdl</Name>
       <FullPath>Customer COF Recheck History.rdl</FullPath>
     </ProjectItem>
@@ -45,10 +49,6 @@
       <Name>STP Listing.rdl</Name>
       <FullPath>STP Listing.rdl</FullPath>
     </ProjectItem>
-    <ProjectItem>
-      <Name>Customer Capture Scoreboard by Teller.rdl</Name>
-      <FullPath>Customer Capture Scoreboard by Teller.rdl</FullPath>
-    </ProjectItem>
   </Reports>
   <Configurations>
     <Configuration>
@@ -56,7 +56,7 @@
       <Platform>Win32</Platform>
       <Options>
         <OutputPath>bin\Debug</OutputPath>
-        <TargetServerVersion>SSRS2008R2</TargetServerVersion>
+        <TargetServerVersion>SSRS2008</TargetServerVersion>
         <TargetFolder>Central Reports</TargetFolder>
         <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
         <TargetDatasetFolder>Datasets</TargetDatasetFolder>

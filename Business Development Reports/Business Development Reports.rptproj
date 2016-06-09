@@ -22,6 +22,10 @@
       <FullPath>COF Rechecks.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>All STP Listings for Customer.rdl</Name>
+      <FullPath>All STP Listings for Customer.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Customer Sale Detail by Station by Product Group.rdl</Name>
       <FullPath>Customer Sale Detail by Station by Product Group.rdl</FullPath>
     </ProjectItem>
@@ -132,7 +136,7 @@
       <Platform>Win32</Platform>
       <Options>
         <OutputPath>bin\Debug</OutputPath>
-        <TargetServerVersion>SSRS2016</TargetServerVersion>
+        <TargetServerVersion>SSRS2008</TargetServerVersion>
         <TargetServerURL>http://localhost/reportserver</TargetServerURL>
         <TargetFolder>Business Development Reports</TargetFolder>
         <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>

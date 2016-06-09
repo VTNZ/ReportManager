@@ -10,10 +10,6 @@
   <DataSets />
   <Reports>
     <ProjectItem>
-      <Name>WoF Plus Top Up Incentives.rdl</Name>
-      <FullPath>WoF Plus Top Up Incentives.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
       <Name>Agency Transactions by Date.rdl</Name>
       <FullPath>Agency Transactions by Date.rdl</FullPath>
     </ProjectItem>
@@ -213,6 +209,10 @@
       <Name>WoF Plus Top Up Incentives- WoF Valet.rdl</Name>
       <FullPath>WoF Plus Top Up Incentives- WoF Valet.rdl</FullPath>
     </ProjectItem>
+    <ProjectItem>
+      <Name>WoF Plus Top Up Incentives.rdl</Name>
+      <FullPath>WoF Plus Top Up Incentives.rdl</FullPath>
+    </ProjectItem>
   </Reports>
   <Configurations>
     <Configuration>
@@ -220,7 +220,7 @@
       <Platform>Win32</Platform>
       <Options>
         <OutputPath>bin\Debug</OutputPath>
-        <TargetServerVersion>SSRS2008R2</TargetServerVersion>
+        <TargetServerVersion>SSRS2008</TargetServerVersion>
         <TargetFolder>FinanceReports</TargetFolder>
         <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
         <TargetDatasetFolder>Datasets</TargetDatasetFolder>
