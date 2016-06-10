@@ -1,3 +1,8 @@
+Version
+=======
+This is a VS2015 solution.  This is because VS2015 comes with integration to Git.
+
+
 Deployment
 ==========
 When deploying from these projects, make sure you use the files in the bin directory, not the originals.
